@@ -1,4 +1,4 @@
-package com.freenow.utility;
+package com.freenow.utility.request;
 
 import lombok.Getter;
 import lombok.Setter;

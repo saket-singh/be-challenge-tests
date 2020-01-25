@@ -1,5 +1,6 @@
-package com.freenow.utility;
+package com.freenow.utility.request;
 
+import com.freenow.utility.ServiceEndpoint;
 import io.restassured.RestAssured;
 import io.restassured.parsing.Parser;
 import io.restassured.response.Response;

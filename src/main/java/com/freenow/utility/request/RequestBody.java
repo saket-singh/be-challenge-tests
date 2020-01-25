@@ -1,4 +1,4 @@
-package com.freenow.utility;
+package com.freenow.utility.request;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;

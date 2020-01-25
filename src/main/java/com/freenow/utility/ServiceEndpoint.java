@@ -1,5 +1,9 @@
 package com.freenow.utility;
 
+import com.freenow.utility.request.HttpMethod;
+import com.freenow.utility.request.Param;
+import com.freenow.utility.request.RequestBody;
+
 import java.util.List;
 
 public interface ServiceEndpoint {
