@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GetUsersResponse {
+
     private Integer id;
     private String name;
     private String username;
