@@ -13,6 +13,16 @@ public class GetUsersClient {
 
     private ObjectMapper mapper;
 
+    public int getHttpStatusCode() {
+        return httpStatusCode;
+    }
+
+    public void setHttpStatusCode(int httpStatusCode) {
+        this.httpStatusCode = httpStatusCode;
+    }
+
+    private int httpStatusCode;
+
     public GetUsersClient(){
         mapper = new ObjectMapper();
     }
@@ -20,6 +30,7 @@ public class GetUsersClient {
     public List<User> getUsersResponse() {
         GetUsersEndpoint getUsersEndpoint = new GetUsersEndpoint();
         Response response = new RequestHandler().processRequest(getUsersEndpoint);
+        setHttpStatusCode(response.getStatusCode());
         List<User> usersList = new ArrayList<>();
         try {
             usersList = mapper.readValue(response.getBody().asString(), new TypeReference<List<User>>() {
