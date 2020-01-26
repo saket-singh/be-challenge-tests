@@ -1,14 +1,32 @@
 package com.freenow.serviceEndpoints.getUsers;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.freenow.utility.request.RequestHandler;
 import io.restassured.response.Response;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class GetUsersClient {
 
-    public GetUsersResponse getUsersResponse() {
+    private ObjectMapper mapper;
+
+    public GetUsersClient(){
+        mapper = new ObjectMapper();
+    }
+
+    public List<User> getUsersResponse() {
         GetUsersEndpoint getUsersEndpoint = new GetUsersEndpoint();
         Response response = new RequestHandler().processRequest(getUsersEndpoint);
-        GetUsersResponse getUsersResponse = response.as(GetUsersResponse.class);
-        return getUsersResponse;
+        List<User> usersList = new ArrayList<>();
+        try {
+            usersList = mapper.readValue(response.getBody().asString(), new TypeReference<List<User>>() {
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return usersList;
     }
 }
