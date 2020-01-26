@@ -11,10 +11,20 @@ repositories {
     mavenCentral()
 }
 
+task RunTests(type: Test) {
+    dependsOn clean, compileTestJava
+    useTestNG {
+        useDefaultListeners = true
+        outputDirectory = file("$buildDir/RunTests")
+    }
+    testLogging.showStandardStreams = true
+}
+
 dependencies {
     testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
     compile 'io.rest-assured:rest-assured:4.2.0'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.1'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.10.1'
     compileOnly 'org.projectlombok:lombok:1.18.10'
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
 }
