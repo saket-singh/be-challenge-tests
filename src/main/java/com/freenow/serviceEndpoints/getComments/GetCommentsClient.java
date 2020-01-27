@@ -1,7 +1,7 @@
 package com.freenow.serviceEndpoints.getComments;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.freenow.serviceEndpoints.BaseClient;
 import com.freenow.utility.request.RequestHandler;
 import io.restassured.response.Response;
 
@@ -9,12 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetCommentsClient {
-    private ObjectMapper mapper;
-
-    public GetCommentsClient() {
-        mapper = new ObjectMapper();
-    }
+public class GetCommentsClient extends BaseClient {
 
     public GetCommentsResponse getCommentsForAUser(String postId) {
         GetCommentsEndpoint getCommentsEndpoint = new GetCommentsEndpoint(postId);

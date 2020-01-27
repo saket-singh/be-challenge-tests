@@ -1,7 +1,7 @@
 package com.freenow.serviceEndpoints.getUsers;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.freenow.serviceEndpoints.BaseClient;
 import com.freenow.utility.request.RequestHandler;
 import io.restassured.response.Response;
 
@@ -9,13 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetUsersClient {
-
-    private ObjectMapper mapper;
-
-    public GetUsersClient() {
-        mapper = new ObjectMapper();
-    }
+public class GetUsersClient extends BaseClient {
 
     public GetUsersResponse getAllUsers() {
         GetUsersEndpoint getUsersEndpoint = new GetUsersEndpoint();

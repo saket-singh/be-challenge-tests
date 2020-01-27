@@ -1,8 +1,7 @@
 package com.freenow.serviceEndpoints.getPosts;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.freenow.serviceEndpoints.getUsers.User;
+import com.freenow.serviceEndpoints.BaseClient;
 import com.freenow.utility.request.RequestHandler;
 import io.restassured.response.Response;
 
@@ -10,15 +9,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetPostsClient {
+public class GetPostsClient extends BaseClient {
 
-    private ObjectMapper mapper;
-
-    public GetPostsClient() {
-        mapper = new ObjectMapper();
-    }
-
-    public GetPostsResponse getPostsForAUser(String userId){
+    public GetPostsResponse getPostsForAUser(String userId) {
         GetPostsEndpoint getPostsEndpoint = new GetPostsEndpoint(userId);
         Response response = new RequestHandler().processRequest(getPostsEndpoint);
         List<Post> posts = new ArrayList<>();
