@@ -1,23 +1,21 @@
 package com.freenow.api.tests;
 
 import com.freenow.serviceEndpoints.getUsers.GetUsersClient;
-import com.freenow.serviceEndpoints.getUsers.User;
+import com.freenow.serviceEndpoints.getUsers.GetUsersResponse;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 public class ApiTests {
 
     GetUsersClient getUsersClient;
 
-    public ApiTests(){
+    public ApiTests() {
         getUsersClient = new GetUsersClient();
     }
 
     @Test
     public void getAllUsers() {
-        List<User> users = getUsersClient.getUsersResponse();
-        Assert.assertEquals(getUsersClient.getHttpStatusCode(),200);
+        GetUsersResponse getUsersResponse = getUsersClient.getUsers();
+        Assert.assertEquals(getUsersResponse.getHttpStatusCode(), 200);
     }
 }
