@@ -17,7 +17,7 @@ public class GetUsersClient {
         mapper = new ObjectMapper();
     }
 
-    public GetUsersResponse getUsers() {
+    public GetUsersResponse getAllUsers() {
         GetUsersEndpoint getUsersEndpoint = new GetUsersEndpoint();
         Response response = new RequestHandler().processRequest(getUsersEndpoint);
         List<User> usersList = new ArrayList<>();
