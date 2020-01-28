@@ -29,6 +29,11 @@ public class GetUsersEndpoint implements ServiceEndpoint {
     }
 
     @Override
+    public List<Param> pathParameters() {
+        return null;
+    }
+
+    @Override
     public List<Param> headers() {
         return null;
     }

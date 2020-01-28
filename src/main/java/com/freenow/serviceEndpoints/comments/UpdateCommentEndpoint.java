@@ -34,7 +34,7 @@ public class UpdateCommentEndpoint implements ServiceEndpoint {
     @Override
     public List<Param> pathParameters() {
         ArrayList<Param> params = new ArrayList<>();
-        params.add(new Param("commentId", commentRequestBody.getId()));
+        params.add(new Param("commentId", String.valueOf(commentRequestBody.getId())));
         return params;
     }
 
