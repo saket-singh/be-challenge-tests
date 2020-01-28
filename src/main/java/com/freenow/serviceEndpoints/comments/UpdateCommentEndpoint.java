@@ -40,7 +40,9 @@ public class UpdateCommentEndpoint implements ServiceEndpoint {
 
     @Override
     public List<Param> headers() {
-        return null;
+        ArrayList<Param> headers = new ArrayList<>();
+        headers.add(new Param("Content-Type", "application/json"));
+        return headers;
     }
 
     @Override

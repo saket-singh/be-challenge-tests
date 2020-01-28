@@ -66,4 +66,20 @@ public class ApiTests {
         Assert.assertEquals(createCommentResponse.getEmail(), email);
         Assert.assertEquals(createCommentResponse.getBody(), body);
     }
+
+    @Test
+    public void updateAnExistingComment() {
+        int commentId = 3;
+        int postId = 2;
+        String name = "Rick";
+        String email = "rick@test.com";
+        String body = "My updated test comment";
+
+        Comment updateCommentResponse = commentsClient.updateAnExistingCommentForAPost(commentId, postId, name, email, body);
+        Assert.assertEquals(updateCommentResponse.getId(), commentId);
+        Assert.assertEquals(updateCommentResponse.getPostId(), postId);
+        Assert.assertEquals(updateCommentResponse.getName(), name);
+        Assert.assertEquals(updateCommentResponse.getEmail(), email);
+        Assert.assertEquals(updateCommentResponse.getBody(), body);
+    }
 }
