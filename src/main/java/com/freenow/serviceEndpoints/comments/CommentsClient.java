@@ -28,9 +28,17 @@ public class CommentsClient extends BaseClient {
     }
 
     public Comment createANewCommentForAPost(String postId, String name, String email, String body) {
-        CreateCommentRequestBody createCommentRequestBody = new CreateCommentRequestBody(postId, name, email, body);
-        CreateCommentEndpoint createCommentEndpoint = new CreateCommentEndpoint(createCommentRequestBody);
+        CommentRequestBody commentRequestBody = new CommentRequestBody(postId, name, email, body);
+        CreateCommentEndpoint createCommentEndpoint = new CreateCommentEndpoint(commentRequestBody);
         Response response = new RequestHandler().processRequest(createCommentEndpoint);
+        Comment comment = response.as(Comment.class);
+        return comment;
+    }
+
+    public Comment updateAnExistingCommentForAPost(String id, String postId, String name, String email, String body) {
+        CommentRequestBody commentRequestBody = new CommentRequestBody(id, postId, name, email, body);
+        UpdateCommentEndpoint updateCommentEndpoint = new UpdateCommentEndpoint(commentRequestBody);
+        Response response = new RequestHandler().processRequest(updateCommentEndpoint);
         Comment comment = response.as(Comment.class);
         return comment;
     }

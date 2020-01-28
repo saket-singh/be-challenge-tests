@@ -6,24 +6,24 @@ import com.freenow.utility.request.HttpMethod;
 import com.freenow.utility.request.Param;
 import com.freenow.utility.request.RequestBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class CreateCommentEndpoint implements ServiceEndpoint {
-
+public class UpdateCommentEndpoint implements ServiceEndpoint {
     private CommentRequestBody commentRequestBody;
 
-    public CreateCommentEndpoint(CommentRequestBody commentRequestBody) {
+    public UpdateCommentEndpoint(CommentRequestBody commentRequestBody) {
         this.commentRequestBody = commentRequestBody;
     }
 
     @Override
     public String url() {
-        return String.format("%s/comments", Url.parentURL);
+        return String.format("%s/comments/{commentId}", Url.parentURL);
     }
 
     @Override
     public HttpMethod httpMethod() {
-        return HttpMethod.POST;
+        return HttpMethod.PUT;
     }
 
     @Override
@@ -33,7 +33,9 @@ public class CreateCommentEndpoint implements ServiceEndpoint {
 
     @Override
     public List<Param> pathParameters() {
-        return null;
+        ArrayList<Param> params = new ArrayList<>();
+        params.add(new Param("commentId", commentRequestBody.getId()));
+        return params;
     }
 
     @Override
