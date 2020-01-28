@@ -1,7 +1,6 @@
 package com.freenow.serviceEndpoints.getPosts;
 
 import com.freenow.constants.Url;
-import com.freenow.serviceEndpoints.comments.CommentRequestBody;
 import com.freenow.utility.ServiceEndpoint;
 import com.freenow.utility.request.HttpMethod;
 import com.freenow.utility.request.Param;
@@ -19,7 +18,7 @@ public class CreatePostEndpoint implements ServiceEndpoint {
 
     @Override
     public String url() {
-        return String.format("%s/comments", Url.parentURL);
+        return String.format("%s/posts", Url.parentURL);
     }
 
     @Override
