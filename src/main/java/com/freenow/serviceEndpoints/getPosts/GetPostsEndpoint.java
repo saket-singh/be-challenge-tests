@@ -12,14 +12,23 @@ import java.util.List;
 public class GetPostsEndpoint implements ServiceEndpoint {
 
     private String userId;
+    private int postId;
+
+    public GetPostsEndpoint() {
+        postId = 0;
+    }
 
     public GetPostsEndpoint(String userId) {
         this.userId = userId;
     }
 
+    public GetPostsEndpoint(int postId) {
+        this.postId = postId;
+    }
+
     @Override
     public String url() {
-        return String.format("%s/posts", Url.parentURL);
+        return String.format("%s/posts/{postId}", Url.parentURL);
     }
 
     @Override
@@ -29,14 +38,22 @@ public class GetPostsEndpoint implements ServiceEndpoint {
 
     @Override
     public List<Param> queryParameters() {
-        ArrayList<Param> queryParams = new ArrayList<>();
-        queryParams.add(new Param("userId", userId));
-        return queryParams;
+        if (userId != null) {
+            ArrayList<Param> queryParams = new ArrayList<>();
+            queryParams.add(new Param("userId", userId));
+            return queryParams;
+        } else
+            return null;
     }
 
     @Override
     public List<Param> pathParameters() {
-        return null;
+        ArrayList<Param> params = new ArrayList<>();
+        if (postId != 0) {
+            params.add(new Param("postId", String.valueOf(postId)));
+        } else
+            params.add(new Param("postId", ""));
+        return params;
     }
 
     @Override
