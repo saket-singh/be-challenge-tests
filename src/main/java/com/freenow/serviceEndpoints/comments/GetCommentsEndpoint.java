@@ -12,14 +12,23 @@ import java.util.List;
 public class GetCommentsEndpoint implements ServiceEndpoint {
 
     private String postId;
+    private int commentId;
+
+    public GetCommentsEndpoint() {
+        commentId = 0;
+    }
 
     public GetCommentsEndpoint(String postId) {
         this.postId = postId;
     }
 
+    public GetCommentsEndpoint(int commentId) {
+        this.commentId = commentId;
+    }
+
     @Override
     public String url() {
-        return String.format("%s/comments", Url.parentURL);
+        return String.format("%s/comments/{commentId}", Url.parentURL);
     }
 
     @Override
@@ -29,14 +38,22 @@ public class GetCommentsEndpoint implements ServiceEndpoint {
 
     @Override
     public List<Param> queryParameters() {
-        ArrayList<Param> queryParams = new ArrayList<>();
-        queryParams.add(new Param("postId", postId));
-        return queryParams;
+        if (postId != null) {
+            ArrayList<Param> queryParams = new ArrayList<>();
+            queryParams.add(new Param("postId", postId));
+            return queryParams;
+        } else
+            return null;
     }
 
     @Override
     public List<Param> pathParameters() {
-        return null;
+            ArrayList<Param> params = new ArrayList<>();
+        if (commentId != 0) {
+            params.add(new Param("commentId", String.valueOf(commentId)));
+        }else
+            params.add(new Param("commentId", ""));
+        return params;
     }
 
     @Override

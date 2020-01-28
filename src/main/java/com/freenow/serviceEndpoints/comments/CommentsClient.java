@@ -11,6 +11,23 @@ import java.util.List;
 
 public class CommentsClient extends BaseClient {
 
+
+    public GetCommentsResponse getAllComments() {
+        GetCommentsEndpoint getCommentsEndpoint = new GetCommentsEndpoint();
+        Response response = new RequestHandler().processRequest(getCommentsEndpoint);
+        List<Comment> comments = new ArrayList<>();
+        try {
+            comments = mapper.readValue(response.getBody().asString(), new TypeReference<List<Comment>>() {
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        GetCommentsResponse getCommentsResponse = new GetCommentsResponse();
+        getCommentsResponse.setComments(comments);
+        getCommentsResponse.setHttpStatusCode(response.getStatusCode());
+        return getCommentsResponse;
+    }
+
     public GetCommentsResponse getCommentsForAUser(String postId) {
         GetCommentsEndpoint getCommentsEndpoint = new GetCommentsEndpoint(postId);
         Response response = new RequestHandler().processRequest(getCommentsEndpoint);
