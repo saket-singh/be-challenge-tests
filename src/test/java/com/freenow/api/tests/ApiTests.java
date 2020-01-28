@@ -105,14 +105,14 @@ public class ApiTests {
 
     @Test
     public void verifyUpdateAnExistingPost() {
-        int posttId = 3;
+        int postId = 3;
         int userId = 2;
         String title = "Test title";
         String body = "My updated test comment";
 
-        Post updatePostResponse = postsClient.updateAnExistingPostForAUser(posttId, userId, title, body);
+        Post updatePostResponse = postsClient.updateAnExistingPostForAUser(postId, userId, title, body);
         Assert.assertEquals(updatePostResponse.getHttpStatusCode(), HttpStatus.SC_OK);
-        Assert.assertEquals(updatePostResponse.getId(), posttId);
+        Assert.assertEquals(updatePostResponse.getId(), postId);
         Assert.assertEquals(updatePostResponse.getUserId(), userId);
         Assert.assertEquals(updatePostResponse.getTitle(), title);
         Assert.assertEquals(updatePostResponse.getBody(), body);
