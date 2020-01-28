@@ -1,4 +1,4 @@
-package com.freenow.serviceEndpoints.getComments;
+package com.freenow.serviceEndpoints.comments;
 
 import com.freenow.serviceEndpoints.BaseResponse;
 import lombok.Getter;

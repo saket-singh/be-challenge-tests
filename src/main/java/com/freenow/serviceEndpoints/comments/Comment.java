@@ -1,4 +1,4 @@
-package com.freenow.serviceEndpoints.getComments;
+package com.freenow.serviceEndpoints.comments;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.freenow.serviceEndpoints.getComments;
+package com.freenow.serviceEndpoints.comments;
 
 import com.freenow.constants.Url;
 import com.freenow.utility.ServiceEndpoint;
@@ -9,12 +9,12 @@ import com.freenow.utility.request.RequestBody;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetCommentsEndpoint implements ServiceEndpoint {
+public class CreateCommentEndpoint implements ServiceEndpoint {
 
-    private String postId;
+    private CreateCommentRequestBody createCommentRequestBody;
 
-    public GetCommentsEndpoint(String postId) {
-        this.postId = postId;
+    public CreateCommentEndpoint(CreateCommentRequestBody createCommentRequestBody) {
+        this.createCommentRequestBody = createCommentRequestBody;
     }
 
     @Override
@@ -24,14 +24,12 @@ public class GetCommentsEndpoint implements ServiceEndpoint {
 
     @Override
     public HttpMethod httpMethod() {
-        return HttpMethod.GET;
+        return HttpMethod.POST;
     }
 
     @Override
     public List<Param> queryParameters() {
-        ArrayList<Param> queryParams = new ArrayList<>();
-        queryParams.add(new Param("postId", postId));
-        return queryParams;
+        return null;
     }
 
     @Override
@@ -46,6 +44,6 @@ public class GetCommentsEndpoint implements ServiceEndpoint {
 
     @Override
     public RequestBody body() {
-        return null;
+        return new RequestBody(CreateCommentRequestBody.class, this.createCommentRequestBody);
     }
 }

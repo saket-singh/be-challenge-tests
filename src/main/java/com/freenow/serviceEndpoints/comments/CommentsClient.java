@@ -1,4 +1,4 @@
-package com.freenow.serviceEndpoints.getComments;
+package com.freenow.serviceEndpoints.comments;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.freenow.serviceEndpoints.BaseClient;
@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetCommentsClient extends BaseClient {
+public class CommentsClient extends BaseClient {
 
     public GetCommentsResponse getCommentsForAUser(String postId) {
         GetCommentsEndpoint getCommentsEndpoint = new GetCommentsEndpoint(postId);
@@ -25,5 +25,13 @@ public class GetCommentsClient extends BaseClient {
         getCommentsResponse.setComments(comments);
         getCommentsResponse.setHttpStatusCode(response.getStatusCode());
         return getCommentsResponse;
+    }
+
+    public Comment createANewCommentForAPost(String postId, String name, String email, String body) {
+        CreateCommentRequestBody createCommentRequestBody = new CreateCommentRequestBody(postId, name, email, body);
+        CreateCommentEndpoint createCommentEndpoint = new CreateCommentEndpoint(createCommentRequestBody);
+        Response response = new RequestHandler().processRequest(createCommentEndpoint);
+        Comment comment = response.as(Comment.class);
+        return comment;
     }
 }

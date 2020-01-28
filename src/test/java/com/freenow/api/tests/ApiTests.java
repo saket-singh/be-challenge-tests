@@ -1,8 +1,8 @@
 package com.freenow.api.tests;
 
 import com.freenow.helpers.EmailIdValidator;
-import com.freenow.serviceEndpoints.getComments.GetCommentsClient;
-import com.freenow.serviceEndpoints.getComments.GetCommentsResponse;
+import com.freenow.serviceEndpoints.comments.CommentsClient;
+import com.freenow.serviceEndpoints.comments.GetCommentsResponse;
 import com.freenow.serviceEndpoints.getPosts.GetPostsClient;
 import com.freenow.serviceEndpoints.getPosts.GetPostsResponse;
 import com.freenow.serviceEndpoints.getPosts.Post;
@@ -20,12 +20,12 @@ public class ApiTests {
 
     GetUsersClient getUsersClient;
     GetPostsClient getPostsClient;
-    GetCommentsClient getCommentsClient;
+    CommentsClient commentsClient;
 
     public ApiTests() {
         getUsersClient = new GetUsersClient();
         getPostsClient = new GetPostsClient();
-        getCommentsClient = new GetCommentsClient();
+        commentsClient = new CommentsClient();
     }
 
     @Test
@@ -44,7 +44,7 @@ public class ApiTests {
         Assert.assertEquals(getPostsResponse.getHttpStatusCode(), HttpStatus.SC_OK);
 
         for (Post post: getPostsResponse.getPosts()) {
-            GetCommentsResponse getCommentsResponse = getCommentsClient.getCommentsForAUser(String.valueOf(post.getId()));
+            GetCommentsResponse getCommentsResponse = commentsClient.getCommentsForAUser(String.valueOf(post.getId()));
             Assert.assertEquals(getCommentsResponse.getHttpStatusCode(), HttpStatus.SC_OK);
             getCommentsResponse.getComments().forEach(comment -> Assert.assertTrue(EmailIdValidator
                     .validateEmailId(comment.getEmail()), "Email is not valid for comment id" + comment.getId()));
