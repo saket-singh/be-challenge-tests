@@ -1,4 +1,4 @@
-package com.freenow.serviceEndpoints.getUsers;
+package com.freenow.serviceEndpoints.Users;
 
 import com.freenow.constants.Url;
 import com.freenow.utility.ServiceEndpoint;

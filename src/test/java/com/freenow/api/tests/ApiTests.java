@@ -4,12 +4,12 @@ import com.freenow.helpers.EmailIdValidator;
 import com.freenow.serviceEndpoints.comments.Comment;
 import com.freenow.serviceEndpoints.comments.CommentsClient;
 import com.freenow.serviceEndpoints.comments.GetCommentsResponse;
-import com.freenow.serviceEndpoints.getPosts.PostsClient;
-import com.freenow.serviceEndpoints.getPosts.GetPostsResponse;
-import com.freenow.serviceEndpoints.getPosts.Post;
-import com.freenow.serviceEndpoints.getUsers.GetUsersClient;
-import com.freenow.serviceEndpoints.getUsers.GetUsersResponse;
-import com.freenow.serviceEndpoints.getUsers.User;
+import com.freenow.serviceEndpoints.Posts.PostsClient;
+import com.freenow.serviceEndpoints.Posts.GetPostsResponse;
+import com.freenow.serviceEndpoints.Posts.Post;
+import com.freenow.serviceEndpoints.Users.GetUsersClient;
+import com.freenow.serviceEndpoints.Users.GetUsersResponse;
+import com.freenow.serviceEndpoints.Users.User;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -79,6 +79,7 @@ public class ApiTests {
         String body = "My updated test comment";
 
         Comment updateCommentResponse = commentsClient.updateAnExistingCommentForAPost(commentId, postId, name, email, body);
+        Assert.assertEquals(updateCommentResponse.getHttpStatusCode(), HttpStatus.SC_OK);
         Assert.assertEquals(updateCommentResponse.getId(), commentId);
         Assert.assertEquals(updateCommentResponse.getPostId(), postId);
         Assert.assertEquals(updateCommentResponse.getName(), name);
@@ -100,5 +101,20 @@ public class ApiTests {
         Assert.assertEquals(createPostResponse.getUserId(), userId);
         Assert.assertEquals(createPostResponse.getTitle(), title);
         Assert.assertEquals(createPostResponse.getBody(), body);
+    }
+
+    @Test
+    public void verifyUpdateAnExistingPost() {
+        int posttId = 3;
+        int userId = 2;
+        String title = "Test title";
+        String body = "My updated test comment";
+
+        Post updatePostResponse = postsClient.updateAnExistingPostForAUser(posttId, userId, title, body);
+        Assert.assertEquals(updatePostResponse.getHttpStatusCode(), HttpStatus.SC_OK);
+        Assert.assertEquals(updatePostResponse.getId(), posttId);
+        Assert.assertEquals(updatePostResponse.getUserId(), userId);
+        Assert.assertEquals(updatePostResponse.getTitle(), title);
+        Assert.assertEquals(updatePostResponse.getBody(), body);
     }
 }

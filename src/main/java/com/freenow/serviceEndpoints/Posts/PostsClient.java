@@ -1,4 +1,4 @@
-package com.freenow.serviceEndpoints.getPosts;
+package com.freenow.serviceEndpoints.Posts;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.freenow.serviceEndpoints.BaseClient;

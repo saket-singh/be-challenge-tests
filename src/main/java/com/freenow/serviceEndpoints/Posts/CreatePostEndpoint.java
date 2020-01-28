@@ -1,4 +1,4 @@
-package com.freenow.serviceEndpoints.getPosts;
+package com.freenow.serviceEndpoints.Posts;
 
 import com.freenow.constants.Url;
 import com.freenow.utility.ServiceEndpoint;
@@ -9,21 +9,21 @@ import com.freenow.utility.request.RequestBody;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UpdatePostEndpoint implements ServiceEndpoint {
+public class CreatePostEndpoint implements ServiceEndpoint {
     private PostRequestBody postRequestBody;
 
-    public UpdatePostEndpoint(PostRequestBody postRequestBody) {
+    public CreatePostEndpoint(PostRequestBody postRequestBody) {
         this.postRequestBody = postRequestBody;
     }
 
     @Override
     public String url() {
-        return String.format("%s/comments/{postId}", Url.parentURL);
+        return String.format("%s/posts", Url.parentURL);
     }
 
     @Override
     public HttpMethod httpMethod() {
-        return HttpMethod.PUT;
+        return HttpMethod.POST;
     }
 
     @Override
@@ -33,9 +33,7 @@ public class UpdatePostEndpoint implements ServiceEndpoint {
 
     @Override
     public List<Param> pathParameters() {
-        ArrayList<Param> params = new ArrayList<>();
-        params.add(new Param("postId", String.valueOf(postRequestBody.getId())));
-        return params;
+        return null;
     }
 
     @Override

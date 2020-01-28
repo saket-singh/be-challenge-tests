@@ -1,4 +1,4 @@
-package com.freenow.serviceEndpoints.getPosts;
+package com.freenow.serviceEndpoints.Posts;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.freenow.serviceEndpoints.BaseResponse;

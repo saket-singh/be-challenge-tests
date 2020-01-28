@@ -1,4 +1,4 @@
-package com.freenow.serviceEndpoints.getUsers;
+package com.freenow.serviceEndpoints.Users;
 
 import com.freenow.serviceEndpoints.BaseResponse;
 import lombok.Getter;

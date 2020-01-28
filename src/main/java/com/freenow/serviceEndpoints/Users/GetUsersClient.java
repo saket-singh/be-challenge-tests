@@ -1,4 +1,4 @@
-package com.freenow.serviceEndpoints.getUsers;
+package com.freenow.serviceEndpoints.Users;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.freenow.serviceEndpoints.BaseClient;
