@@ -51,7 +51,9 @@ public class RequestHandler {
         if (serviceEndpoint.headers() != null) {
             serviceEndpoint.headers().forEach(h -> request.header(h.getKey(), h.getValue()));
         }
-
+        if (serviceEndpoint.pathParameters() != null) {
+            serviceEndpoint.pathParameters().forEach(p -> request.pathParam(p.getKey(), p.getValue()));
+        }
         if (serviceEndpoint.queryParameters() != null) {
             serviceEndpoint.queryParameters().forEach(q -> request.queryParam(q.getKey(), q.getValue()));
         }

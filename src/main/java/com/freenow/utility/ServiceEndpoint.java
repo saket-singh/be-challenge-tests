@@ -25,6 +25,12 @@ public interface ServiceEndpoint {
     List<Param> queryParameters();
 
     /**
+     * Define service endpoint path params
+     * @return List of type params
+     */
+    List<Param> pathParameters();
+
+    /**
      * Define service endpoint headers
      *
      * @return List of type params
