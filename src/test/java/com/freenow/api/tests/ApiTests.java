@@ -4,7 +4,7 @@ import com.freenow.helpers.EmailIdValidator;
 import com.freenow.serviceEndpoints.comments.Comment;
 import com.freenow.serviceEndpoints.comments.CommentsClient;
 import com.freenow.serviceEndpoints.comments.GetCommentsResponse;
-import com.freenow.serviceEndpoints.getPosts.GetPostsClient;
+import com.freenow.serviceEndpoints.getPosts.PostsClient;
 import com.freenow.serviceEndpoints.getPosts.GetPostsResponse;
 import com.freenow.serviceEndpoints.getPosts.Post;
 import com.freenow.serviceEndpoints.getUsers.GetUsersClient;
@@ -20,12 +20,12 @@ import java.util.stream.Collectors;
 public class ApiTests {
 
     GetUsersClient getUsersClient;
-    GetPostsClient getPostsClient;
+    PostsClient postsClient;
     CommentsClient commentsClient;
 
     public ApiTests() {
         getUsersClient = new GetUsersClient();
-        getPostsClient = new GetPostsClient();
+        postsClient = new PostsClient();
         commentsClient = new CommentsClient();
     }
 
@@ -41,7 +41,7 @@ public class ApiTests {
 
         int userId = requiredUser.get(0).getId();
 
-        GetPostsResponse getPostsResponse = getPostsClient.getPostsForAUser(String.valueOf(userId));
+        GetPostsResponse getPostsResponse = postsClient.getPostsForAUser(String.valueOf(userId));
         Assert.assertEquals(getPostsResponse.getHttpStatusCode(), HttpStatus.SC_OK);
 
         for (Post post: getPostsResponse.getPosts()) {
