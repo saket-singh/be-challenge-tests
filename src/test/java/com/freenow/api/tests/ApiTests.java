@@ -12,6 +12,7 @@ import com.freenow.serviceEndpoints.Users.GetUsersResponse;
 import com.freenow.serviceEndpoints.Users.User;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class ApiTests {
     @Test
     public void validateCommentsForPostMadeByAUser() {
         String userName = "Samantha";
+        Reporter.log("Getting all users", true);
         GetUsersResponse getUsersResponse = getUsersClient.getAllUsers();
         Assert.assertEquals(getUsersResponse.getHttpStatusCode(), HttpStatus.SC_OK);
         Assert.assertTrue(!getUsersResponse.getUsers().isEmpty(), "No users returned");

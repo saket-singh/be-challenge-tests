@@ -12,7 +12,7 @@ public class BaseTests {
         Reporter.log("********************* API Automation Suite Started *********************", true);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void testComplete() {
         Reporter.log("********************* Test Complete *********************", true);
     }

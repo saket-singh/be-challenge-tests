@@ -5,6 +5,7 @@ import io.restassured.RestAssured;
 import io.restassured.parsing.Parser;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.testng.Reporter;
 
 import static io.restassured.RestAssured.given;
 
@@ -19,6 +20,7 @@ public class RequestHandler {
 
         RequestSpecification requestSpecification = formRequestSpecification(serviceEndpoint);
 
+        logRequestDetails(serviceEndpoint, serviceEndpoint.getClass().getSimpleName(), url, httpMethod, body);
         Response response = makeAPIRequestAsPerHTTPMethod(url, httpMethod, requestSpecification);
 
         return response;
@@ -62,5 +64,17 @@ public class RequestHandler {
             request.body(serviceEndpoint.body().getBodyAsString());
 
         return request;
+    }
+
+    private void logRequestDetails(ServiceEndpoint serviceEndpoint, String endpointName, String url, HttpMethod httpMethod, RequestBody body) {
+        Reporter.log(String.format("\n" + endpointName + " URL --- %s %s", httpMethod.toString(), url), true);
+
+        if (serviceEndpoint.headers() != null) {
+            for (Param p : serviceEndpoint.headers()) {
+                Reporter.log(String.format(endpointName + " Header --- [ %s : %s ]", p.getKey(), p.getValue()), true);
+            }
+        }
+        if (body != null)
+            Reporter.log(String.format(endpointName + " Request --- %s", body.getBodyAsString()), true);
     }
 }
