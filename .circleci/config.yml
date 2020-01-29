@@ -27,3 +27,6 @@ jobs:
 
       # run tests!
       - run: ./gradlew clean RunTests
+
+      - store_artifacts:
+          path: /build/RunTests
