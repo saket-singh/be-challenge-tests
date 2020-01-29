@@ -37,20 +37,28 @@ public class ApiTests {
         GetUsersResponse getUsersResponse = getUsersClient.getAllUsers();
         Assert.assertEquals(getUsersResponse.getHttpStatusCode(), HttpStatus.SC_OK);
         Assert.assertTrue(!getUsersResponse.getUsers().isEmpty(), "No users returned");
+        Reporter.log("Users returned successfully", true);
+
+        Reporter.log("Finding user with name + " + userName, true);
         List<User> requiredUser = getUsersResponse.getUsers().stream().filter(user -> user.getUsername().equals(userName))
                 .collect(Collectors.toList());
         Assert.assertTrue(!requiredUser.isEmpty(), "No users present with this name");
-
+        Reporter.log("User found with name " + userName, true);
         int userId = requiredUser.get(0).getId();
 
+        Reporter.log("Getting all posts for user id " + userId, true);
         GetPostsResponse getPostsResponse = postsClient.getPostsForAUser(String.valueOf(userId));
         Assert.assertEquals(getPostsResponse.getHttpStatusCode(), HttpStatus.SC_OK);
+        Reporter.log("Posts returned successfully", true);
 
         for (Post post : getPostsResponse.getPosts()) {
+            Reporter.log("Fetching all comments for post id " + post.getId(), true);
             GetCommentsResponse getCommentsResponse = commentsClient.getCommentsForAUser(String.valueOf(post.getId()));
             Assert.assertEquals(getCommentsResponse.getHttpStatusCode(), HttpStatus.SC_OK);
+            Reporter.log("Comments fetched successfully", true);
             getCommentsResponse.getComments().forEach(comment -> Assert.assertTrue(EmailIdValidator
                     .validateEmailId(comment.getEmail()), "Email is not valid for comment id" + comment.getId()));
+            Reporter.log("All email ids in comments for post Id " + post.getId() + " is validated successfully", true);
         }
     }
 
@@ -61,8 +69,12 @@ public class ApiTests {
         String email = "rick@test.com";
         String body = "My test comment";
 
+        Reporter.log("Getting all comments", true);
         GetCommentsResponse getCommentsResponse = commentsClient.getAllComments();
         Assert.assertEquals(getCommentsResponse.getHttpStatusCode(), HttpStatus.SC_OK);
+        Reporter.log("Comments fetched successfully", true);
+
+        Reporter.log("Creating a new comment", true);
         Comment createCommentResponse = commentsClient.createANewCommentForAPost(postId, name, email, body);
         Assert.assertEquals(createCommentResponse.getHttpStatusCode(), HttpStatus.SC_CREATED);
         Assert.assertEquals(createCommentResponse.getId(), getCommentsResponse.getComments().size() + 1);
@@ -70,6 +82,7 @@ public class ApiTests {
         Assert.assertEquals(createCommentResponse.getName(), name);
         Assert.assertEquals(createCommentResponse.getEmail(), email);
         Assert.assertEquals(createCommentResponse.getBody(), body);
+        Reporter.log("Comment successfully created", true);
     }
 
     @Test
@@ -80,6 +93,7 @@ public class ApiTests {
         String email = "rick@test.com";
         String body = "My updated test comment";
 
+        Reporter.log("Updating an existing comment with comment id " + commentId, true);
         Comment updateCommentResponse = commentsClient.updateAnExistingCommentForAPost(commentId, postId, name, email, body);
         Assert.assertEquals(updateCommentResponse.getHttpStatusCode(), HttpStatus.SC_OK);
         Assert.assertEquals(updateCommentResponse.getId(), commentId);
@@ -87,6 +101,7 @@ public class ApiTests {
         Assert.assertEquals(updateCommentResponse.getName(), name);
         Assert.assertEquals(updateCommentResponse.getEmail(), email);
         Assert.assertEquals(updateCommentResponse.getBody(), body);
+        Reporter.log("Comment successfully updated", true);
     }
 
     @Test
@@ -95,14 +110,19 @@ public class ApiTests {
         String title = "Post blog";
         String body = "My test post";
 
+        Reporter.log("Getting all posts", true);
         GetPostsResponse getPostsResponse = postsClient.getAllPosts();
         Assert.assertEquals(getPostsResponse.getHttpStatusCode(), HttpStatus.SC_OK);
+        Reporter.log("Posts returned successfully", true);
+
+        Reporter.log("Creating a new post", true);
         Post createPostResponse = postsClient.createANewPostForAUser(userId, title, body);
         Assert.assertEquals(createPostResponse.getHttpStatusCode(), HttpStatus.SC_CREATED);
         Assert.assertEquals(createPostResponse.getId(), getPostsResponse.getPosts().size() + 1);
         Assert.assertEquals(createPostResponse.getUserId(), userId);
         Assert.assertEquals(createPostResponse.getTitle(), title);
         Assert.assertEquals(createPostResponse.getBody(), body);
+        Reporter.log("Post successfully created with auto generated post Id " + createPostResponse.getId(), true);
     }
 
     @Test
@@ -112,29 +132,34 @@ public class ApiTests {
         String title = "Test title";
         String body = "My updated test comment";
 
+        Reporter.log("Updating an existing post for a user with post id " + postId + "and user id " + userId, true);
         Post updatePostResponse = postsClient.updateAnExistingPostForAUser(postId, userId, title, body);
         Assert.assertEquals(updatePostResponse.getHttpStatusCode(), HttpStatus.SC_OK);
         Assert.assertEquals(updatePostResponse.getId(), postId);
         Assert.assertEquals(updatePostResponse.getUserId(), userId);
         Assert.assertEquals(updatePostResponse.getTitle(), title);
         Assert.assertEquals(updatePostResponse.getBody(), body);
+        Reporter.log("Post successfully updated", true);
     }
 
     @Test
     public void verifyNestedRouteForCommentsInAPost() {
         int postId = 3;
 
+        Reporter.log("Get all comments for a post via nested route", true);
         GetCommentsResponse getCommentsResponse = commentsClient.getCommentsResponseForNestedRoute(String.valueOf(postId));
         Assert.assertEquals(getCommentsResponse.getHttpStatusCode(), HttpStatus.SC_OK);
         for (Comment comment : getCommentsResponse.getComments()) {
             Assert.assertEquals(comment.getPostId(), postId, "Comment returned is with incorrect postId");
         }
+        Reporter.log("All comments returned successfully", true);
     }
 
     @Test
     public void verifyDeletionForAPost() {
         int postID = 2;
-        Reporter.log("Getting Status");
+        Reporter.log("Deleting a post with post id " +postID, true);
         Assert.assertEquals(postsClient.getStatusForDeletingAnExistingPost(postID), HttpStatus.SC_OK);
+        Reporter.log("Post successfully deleted", true);
     }
 }
