@@ -1,15 +1,15 @@
 package com.freenow.api.tests;
 
 import com.freenow.helpers.EmailIdValidator;
-import com.freenow.serviceEndpoints.comments.Comment;
-import com.freenow.serviceEndpoints.comments.CommentsClient;
-import com.freenow.serviceEndpoints.comments.GetCommentsResponse;
-import com.freenow.serviceEndpoints.Posts.PostsClient;
 import com.freenow.serviceEndpoints.Posts.GetPostsResponse;
 import com.freenow.serviceEndpoints.Posts.Post;
+import com.freenow.serviceEndpoints.Posts.PostsClient;
 import com.freenow.serviceEndpoints.Users.GetUsersClient;
 import com.freenow.serviceEndpoints.Users.GetUsersResponse;
 import com.freenow.serviceEndpoints.Users.User;
+import com.freenow.serviceEndpoints.comments.Comment;
+import com.freenow.serviceEndpoints.comments.CommentsClient;
+import com.freenow.serviceEndpoints.comments.GetCommentsResponse;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.Reporter;
@@ -46,7 +46,7 @@ public class ApiTests {
         GetPostsResponse getPostsResponse = postsClient.getPostsForAUser(String.valueOf(userId));
         Assert.assertEquals(getPostsResponse.getHttpStatusCode(), HttpStatus.SC_OK);
 
-        for (Post post: getPostsResponse.getPosts()) {
+        for (Post post : getPostsResponse.getPosts()) {
             GetCommentsResponse getCommentsResponse = commentsClient.getCommentsForAUser(String.valueOf(post.getId()));
             Assert.assertEquals(getCommentsResponse.getHttpStatusCode(), HttpStatus.SC_OK);
             getCommentsResponse.getComments().forEach(comment -> Assert.assertTrue(EmailIdValidator
@@ -118,5 +118,16 @@ public class ApiTests {
         Assert.assertEquals(updatePostResponse.getUserId(), userId);
         Assert.assertEquals(updatePostResponse.getTitle(), title);
         Assert.assertEquals(updatePostResponse.getBody(), body);
+    }
+
+    @Test
+    public void verifyNestedRouteForCommentsInAPost() {
+        int postId = 3;
+
+        GetCommentsResponse getCommentsResponse = commentsClient.getCommentsResponseForNestedRoute(String.valueOf(postId));
+        Assert.assertEquals(getCommentsResponse.getHttpStatusCode(), HttpStatus.SC_OK);
+        for (Comment comment : getCommentsResponse.getComments()) {
+            Assert.assertEquals(comment.getPostId(), postId, "Comment returned is with incorrect postId");
+        }
     }
 }

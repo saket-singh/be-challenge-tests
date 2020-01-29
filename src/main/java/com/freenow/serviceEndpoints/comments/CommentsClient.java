@@ -61,4 +61,20 @@ public class CommentsClient extends BaseClient {
         comment.setHttpStatusCode(response.statusCode());
         return comment;
     }
+
+    public GetCommentsResponse getCommentsResponseForNestedRoute (String postId) {
+        GetCommentsNestedRouteEndpoint getCommentsNestedRouteEndpoint = new GetCommentsNestedRouteEndpoint(postId);
+        Response response = new RequestHandler().processRequest(getCommentsNestedRouteEndpoint);
+        List<Comment> comments = new ArrayList<>();
+        try {
+            comments = mapper.readValue(response.getBody().asString(), new TypeReference<List<Comment>>() {
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        GetCommentsResponse getCommentsResponse = new GetCommentsResponse();
+        getCommentsResponse.setComments(comments);
+        getCommentsResponse.setHttpStatusCode(response.getStatusCode());
+        return getCommentsResponse;
+    }
 }
