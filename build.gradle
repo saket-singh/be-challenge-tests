@@ -17,7 +17,7 @@ task RunTests(type: Test) {
         useDefaultListeners = false
         listeners << 'org.uncommons.reportng.HTMLReporter'
         listeners << 'org.uncommons.reportng.JUnitXMLReporter'
-        outputDirectory = file("$buildDir/RunTests")
+        outputDirectory = file("$buildDir/RunTests/artifacts")
     }
     testLogging.showStandardStreams = true
 }

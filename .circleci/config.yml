@@ -29,5 +29,5 @@ jobs:
       - run: ./gradlew clean RunTests
 
       - store_artifacts:
-          path: be-challenge-tests/build/RunTests
+          path: /build/RunTests/artifacts
           destination: artifact-file
