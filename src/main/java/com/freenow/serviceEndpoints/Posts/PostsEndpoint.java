@@ -9,21 +9,25 @@ import com.freenow.utility.request.RequestBody;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetPostsEndpoint implements ServiceEndpoint {
+public class PostsEndpoint implements ServiceEndpoint {
 
     private String userId;
     private int postId;
+    private HttpMethod httpMethod;
 
-    public GetPostsEndpoint() {
+    public PostsEndpoint(HttpMethod httpMethod) {
         postId = 0;
+        this.httpMethod = httpMethod;
     }
 
-    public GetPostsEndpoint(String userId) {
+    public PostsEndpoint(String userId, HttpMethod httpMethod) {
         this.userId = userId;
+        this.httpMethod = httpMethod;
     }
 
-    public GetPostsEndpoint(int postId) {
+    public PostsEndpoint(int postId, HttpMethod httpMethod) {
         this.postId = postId;
+        this.httpMethod = httpMethod;
     }
 
     @Override
@@ -33,7 +37,7 @@ public class GetPostsEndpoint implements ServiceEndpoint {
 
     @Override
     public HttpMethod httpMethod() {
-        return HttpMethod.GET;
+        return httpMethod;
     }
 
     @Override

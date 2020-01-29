@@ -2,6 +2,7 @@ package com.freenow.serviceEndpoints.Posts;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.freenow.serviceEndpoints.BaseClient;
+import com.freenow.utility.request.HttpMethod;
 import com.freenow.utility.request.RequestHandler;
 import io.restassured.response.Response;
 
@@ -12,8 +13,8 @@ import java.util.List;
 public class PostsClient extends BaseClient {
 
     public GetPostsResponse getAllPosts() {
-        GetPostsEndpoint getPostsEndpoint = new GetPostsEndpoint();
-        Response response = new RequestHandler().processRequest(getPostsEndpoint);
+        PostsEndpoint postsEndpoint = new PostsEndpoint(HttpMethod.GET);
+        Response response = new RequestHandler().processRequest(postsEndpoint);
         List<Post> posts = new ArrayList<>();
         try {
             posts = mapper.readValue(response.getBody().asString(), new TypeReference<List<Post>>() {
@@ -28,8 +29,8 @@ public class PostsClient extends BaseClient {
     }
 
     public GetPostsResponse getPostsForAUser(String userId) {
-        GetPostsEndpoint getPostsEndpoint = new GetPostsEndpoint(userId);
-        Response response = new RequestHandler().processRequest(getPostsEndpoint);
+        PostsEndpoint postsEndpoint = new PostsEndpoint(userId, HttpMethod.GET);
+        Response response = new RequestHandler().processRequest(postsEndpoint);
         List<Post> posts = new ArrayList<>();
         try {
             posts = mapper.readValue(response.getBody().asString(), new TypeReference<List<Post>>() {
@@ -59,5 +60,11 @@ public class PostsClient extends BaseClient {
         Post post = response.as(Post.class);
         post.setHttpStatusCode(response.statusCode());
         return post;
+    }
+
+    public int getStatusForDeletingAnExistingPost(int postId) {
+        PostsEndpoint postsEndpoint = new PostsEndpoint(postId, HttpMethod.DELETE);
+        Response response = new RequestHandler().processRequest(postsEndpoint);
+        return response.getStatusCode();
     }
 }

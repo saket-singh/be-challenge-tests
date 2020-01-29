@@ -130,4 +130,11 @@ public class ApiTests {
             Assert.assertEquals(comment.getPostId(), postId, "Comment returned is with incorrect postId");
         }
     }
+
+    @Test
+    public void verifyDeletionForAPost() {
+        int postID = 2;
+        Reporter.log("Getting Status");
+        Assert.assertEquals(postsClient.getStatusForDeletingAnExistingPost(postID), HttpStatus.SC_OK);
+    }
 }
