@@ -17,12 +17,14 @@ public class RequestHandler {
         String url = serviceEndpoint.url();
         HttpMethod httpMethod = serviceEndpoint.httpMethod();
         RequestBody body = serviceEndpoint.body();
+        String endpointName = serviceEndpoint.getClass().getSimpleName();
 
         RequestSpecification requestSpecification = formRequestSpecification(serviceEndpoint);
 
-        logRequestDetails(serviceEndpoint, serviceEndpoint.getClass().getSimpleName(), url, httpMethod, body);
+        logRequestDetails(serviceEndpoint,endpointName , url, httpMethod, body);
         Response response = makeAPIRequestAsPerHTTPMethod(url, httpMethod, requestSpecification);
 
+        logResponseDetails(serviceEndpoint, endpointName, response);
         return response;
     }
 
@@ -76,5 +78,14 @@ public class RequestHandler {
         }
         if (body != null)
             Reporter.log(String.format(endpointName + " Request --- %s", body.getBodyAsString()), true);
+    }
+
+    private void logResponseDetails(ServiceEndpoint serviceEndpoint, String endpointName, Response response) {
+        Reporter.log(String.format(endpointName + " Response Status Code --- (%s)", response.getStatusCode()), true);
+
+        if (serviceEndpoint.getClass() != null) {
+            Reporter.log(String.format(endpointName + " Response --- %s", response.asString()), true);
+        }
+        Reporter.log(String.format("\n%s Response headers --- \n%s", endpointName, response.getHeaders().toString()), true);
     }
 }
