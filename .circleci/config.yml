@@ -29,4 +29,4 @@ jobs:
       - run: ./gradlew clean RunTests
 
       - store_artifacts:
-          path: /build/RunTests
+          path: /build/RunTests/*
