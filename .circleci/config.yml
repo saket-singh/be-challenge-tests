@@ -8,6 +8,7 @@ jobs:
     docker:
       - image: circleci/openjdk:8-jdk
 
+    working_directory: /be-challenge-tests
     steps:
       - checkout
 
@@ -29,5 +30,5 @@ jobs:
       - run: ./gradlew clean RunTests
 
       - store_artifacts:
-          path: ~/build/RunTests
+          path: /build/RunTests
           destination: artifact-file
