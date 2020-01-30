@@ -27,10 +27,10 @@ public class RequestHandler {
 
         RequestSpecification requestSpecification = formRequestSpecification(serviceEndpoint);
 
-//        logRequestDetails(serviceEndpoint, endpointName, url, httpMethod, body);
+        logRequestDetails(serviceEndpoint, endpointName, url, httpMethod, body);
         Response response = makeAPIRequestAsPerHTTPMethod(url, httpMethod, requestSpecification);
 
-//        logResponseDetails(serviceEndpoint, endpointName, response);
+        logResponseDetails(serviceEndpoint, endpointName, response);
         return response;
     }
 
