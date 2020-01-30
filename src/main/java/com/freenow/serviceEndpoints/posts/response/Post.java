@@ -1,7 +1,7 @@
-package com.freenow.serviceEndpoints.Posts;
+package com.freenow.serviceEndpoints.posts.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.freenow.serviceEndpoints.BaseResponse;
+import com.freenow.serviceEndpoints.base.BaseResponse;
 import lombok.Getter;
 import lombok.Setter;
 

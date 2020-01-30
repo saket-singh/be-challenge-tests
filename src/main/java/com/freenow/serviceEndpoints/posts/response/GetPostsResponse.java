@@ -1,6 +1,6 @@
-package com.freenow.serviceEndpoints.Posts;
+package com.freenow.serviceEndpoints.posts.response;
 
-import com.freenow.serviceEndpoints.BaseResponse;
+import com.freenow.serviceEndpoints.base.BaseResponse;
 import lombok.Getter;
 import lombok.Setter;
 

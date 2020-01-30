@@ -1,4 +1,4 @@
-package com.freenow.serviceEndpoints.Users;
+package com.freenow.serviceEndpoints.users.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;

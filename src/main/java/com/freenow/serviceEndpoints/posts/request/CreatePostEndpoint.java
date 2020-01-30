@@ -1,4 +1,4 @@
-package com.freenow.serviceEndpoints.comments;
+package com.freenow.serviceEndpoints.posts.request;
 
 import com.freenow.constants.Url;
 import com.freenow.utility.ServiceEndpoint;
@@ -9,23 +9,21 @@ import com.freenow.utility.request.RequestBody;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetCommentsNestedRouteEndpoint implements ServiceEndpoint {
+public class CreatePostEndpoint implements ServiceEndpoint {
+    private PostRequestBody postRequestBody;
 
-    private String postId;
-
-    public GetCommentsNestedRouteEndpoint(String postId) {
-        this.postId = postId;
+    public CreatePostEndpoint(PostRequestBody postRequestBody) {
+        this.postRequestBody = postRequestBody;
     }
-
 
     @Override
     public String url() {
-        return String.format("%s/posts/{postId}/comments", Url.parentURL);
+        return String.format("%s/posts", Url.parentURL);
     }
 
     @Override
     public HttpMethod httpMethod() {
-        return HttpMethod.GET;
+        return HttpMethod.POST;
     }
 
     @Override
@@ -35,18 +33,18 @@ public class GetCommentsNestedRouteEndpoint implements ServiceEndpoint {
 
     @Override
     public List<Param> pathParameters() {
-        ArrayList<Param> params = new ArrayList<>();
-        params.add(new Param("postId", postId));
-        return params;
+        return null;
     }
 
     @Override
     public List<Param> headers() {
-        return null;
+        ArrayList<Param> headers = new ArrayList<>();
+        headers.add(new Param("Content-Type", "application/json"));
+        return headers;
     }
 
     @Override
     public RequestBody body() {
-        return null;
+        return new RequestBody(PostRequestBody.class, this.postRequestBody);
     }
 }

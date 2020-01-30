@@ -1,4 +1,4 @@
-package com.freenow.serviceEndpoints.Posts;
+package com.freenow.serviceEndpoints.posts.request;
 
 import com.freenow.constants.Url;
 import com.freenow.utility.ServiceEndpoint;

@@ -1,7 +1,10 @@
-package com.freenow.serviceEndpoints.Users;
+package com.freenow.serviceEndpoints.users.client;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.freenow.serviceEndpoints.BaseClient;
+import com.freenow.serviceEndpoints.base.BaseClient;
+import com.freenow.serviceEndpoints.users.request.GetUsersEndpoint;
+import com.freenow.serviceEndpoints.users.response.GetUsersResponse;
+import com.freenow.serviceEndpoints.users.response.User;
 import com.freenow.utility.request.RequestHandler;
 import io.restassured.response.Response;
 

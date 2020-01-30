@@ -1,15 +1,15 @@
 package com.freenow.api.tests;
 
 import com.freenow.helpers.EmailIdValidator;
-import com.freenow.serviceEndpoints.Posts.GetPostsResponse;
-import com.freenow.serviceEndpoints.Posts.Post;
-import com.freenow.serviceEndpoints.Posts.PostsClient;
-import com.freenow.serviceEndpoints.Users.GetUsersClient;
-import com.freenow.serviceEndpoints.Users.GetUsersResponse;
-import com.freenow.serviceEndpoints.Users.User;
-import com.freenow.serviceEndpoints.comments.Comment;
-import com.freenow.serviceEndpoints.comments.CommentsClient;
-import com.freenow.serviceEndpoints.comments.GetCommentsResponse;
+import com.freenow.serviceEndpoints.posts.response.GetPostsResponse;
+import com.freenow.serviceEndpoints.posts.response.Post;
+import com.freenow.serviceEndpoints.posts.clients.PostsClient;
+import com.freenow.serviceEndpoints.users.client.GetUsersClient;
+import com.freenow.serviceEndpoints.users.response.GetUsersResponse;
+import com.freenow.serviceEndpoints.users.response.User;
+import com.freenow.serviceEndpoints.comments.response.Comment;
+import com.freenow.serviceEndpoints.comments.clients.CommentsClient;
+import com.freenow.serviceEndpoints.comments.response.GetCommentsResponse;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.Reporter;

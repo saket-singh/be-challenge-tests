@@ -1,4 +1,4 @@
-package com.freenow.serviceEndpoints.comments;
+package com.freenow.serviceEndpoints.comments.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

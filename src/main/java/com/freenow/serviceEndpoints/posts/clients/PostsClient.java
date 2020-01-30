@@ -1,7 +1,13 @@
-package com.freenow.serviceEndpoints.Posts;
+package com.freenow.serviceEndpoints.posts.clients;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.freenow.serviceEndpoints.BaseClient;
+import com.freenow.serviceEndpoints.base.BaseClient;
+import com.freenow.serviceEndpoints.posts.response.GetPostsResponse;
+import com.freenow.serviceEndpoints.posts.response.Post;
+import com.freenow.serviceEndpoints.posts.request.CreatePostEndpoint;
+import com.freenow.serviceEndpoints.posts.request.PostRequestBody;
+import com.freenow.serviceEndpoints.posts.request.PostsEndpoint;
+import com.freenow.serviceEndpoints.posts.request.UpdatePostEndpoint;
 import com.freenow.utility.request.HttpMethod;
 import com.freenow.utility.request.RequestHandler;
 import io.restassured.response.Response;

@@ -1,4 +1,4 @@
-package com.freenow.serviceEndpoints;
+package com.freenow.serviceEndpoints.base;
 
 import lombok.Getter;
 import lombok.Setter;

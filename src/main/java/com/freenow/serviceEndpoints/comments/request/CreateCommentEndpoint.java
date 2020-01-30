@@ -1,6 +1,7 @@
-package com.freenow.serviceEndpoints.comments;
+package com.freenow.serviceEndpoints.comments.request;
 
 import com.freenow.constants.Url;
+import com.freenow.serviceEndpoints.comments.request.CommentRequestBody;
 import com.freenow.utility.ServiceEndpoint;
 import com.freenow.utility.request.HttpMethod;
 import com.freenow.utility.request.Param;
@@ -9,21 +10,22 @@ import com.freenow.utility.request.RequestBody;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UpdateCommentEndpoint implements ServiceEndpoint {
+public class CreateCommentEndpoint implements ServiceEndpoint {
+
     private CommentRequestBody commentRequestBody;
 
-    public UpdateCommentEndpoint(CommentRequestBody commentRequestBody) {
+    public CreateCommentEndpoint(CommentRequestBody commentRequestBody) {
         this.commentRequestBody = commentRequestBody;
     }
 
     @Override
     public String url() {
-        return String.format("%s/comments/{commentId}", Url.parentURL);
+        return String.format("%s/comments", Url.parentURL);
     }
 
     @Override
     public HttpMethod httpMethod() {
-        return HttpMethod.PUT;
+        return HttpMethod.POST;
     }
 
     @Override
@@ -33,9 +35,7 @@ public class UpdateCommentEndpoint implements ServiceEndpoint {
 
     @Override
     public List<Param> pathParameters() {
-        ArrayList<Param> params = new ArrayList<>();
-        params.add(new Param("commentId", String.valueOf(commentRequestBody.getId())));
-        return params;
+        return null;
     }
 
     @Override

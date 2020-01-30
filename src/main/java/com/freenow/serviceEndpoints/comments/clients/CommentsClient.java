@@ -1,7 +1,10 @@
-package com.freenow.serviceEndpoints.comments;
+package com.freenow.serviceEndpoints.comments.clients;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.freenow.serviceEndpoints.BaseClient;
+import com.freenow.serviceEndpoints.base.BaseClient;
+import com.freenow.serviceEndpoints.comments.request.*;
+import com.freenow.serviceEndpoints.comments.response.Comment;
+import com.freenow.serviceEndpoints.comments.response.GetCommentsResponse;
 import com.freenow.utility.request.RequestHandler;
 import io.restassured.response.Response;
 

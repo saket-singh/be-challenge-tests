@@ -1,4 +1,4 @@
-package com.freenow.serviceEndpoints.Users;
+package com.freenow.serviceEndpoints.comments.request;
 
 import com.freenow.constants.Url;
 import com.freenow.utility.ServiceEndpoint;
@@ -6,16 +6,21 @@ import com.freenow.utility.request.HttpMethod;
 import com.freenow.utility.request.Param;
 import com.freenow.utility.request.RequestBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class GetUsersEndpoint implements ServiceEndpoint {
+public class GetCommentsNestedRouteEndpoint implements ServiceEndpoint {
 
-    public GetUsersEndpoint() {
+    private String postId;
+
+    public GetCommentsNestedRouteEndpoint(String postId) {
+        this.postId = postId;
     }
+
 
     @Override
     public String url() {
-        return String.format("%s/users", Url.parentURL);
+        return String.format("%s/posts/{postId}/comments", Url.parentURL);
     }
 
     @Override
@@ -30,7 +35,9 @@ public class GetUsersEndpoint implements ServiceEndpoint {
 
     @Override
     public List<Param> pathParameters() {
-        return null;
+        ArrayList<Param> params = new ArrayList<>();
+        params.add(new Param("postId", postId));
+        return params;
     }
 
     @Override
