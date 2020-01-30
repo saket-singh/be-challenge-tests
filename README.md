@@ -8,11 +8,11 @@ API test automation framework created with Java and Rest Assured. You can find t
 `brew install gradle` to install it using Homebrew.
 
 # Usage
-1. To execute the tests, go to the root directory of the project and execute the following command:
+* To execute the tests, go to the root directory of the project and execute the following command:
 ```$xslt
 ./gradlew clean RunTests
 ```
-2. The request sent, the endpoint and the response returned, all are getting logged to the Reports as well as on the standard output.
+* The request sent, the endpoint and the response returned, all are getting logged to the Reports as well as on the standard output.
 
 # Reporting
 * For generating test execution reports, `ReportNg` is being used 
