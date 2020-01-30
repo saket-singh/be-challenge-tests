@@ -11,8 +11,6 @@ public class EmailIdValidator {
     public static boolean validateEmailId(String email) {
 
         EmailValidator validator = EmailValidator.getInstance();
-
-        // Validate specified String containing an email address
         if (validator.isValid(email)) {
             return true;
         }
