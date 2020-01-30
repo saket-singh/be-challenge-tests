@@ -158,8 +158,16 @@ public class ApiTests {
     @Test
     public void verifyDeletionForAPost() {
         int postID = 2;
-        Reporter.log("Deleting a post with post id " +postID, true);
-        Assert.assertEquals(postsClient.getStatusForDeletingAnExistingPost(postID), HttpStatus.SC_OK);
+        Reporter.log("Deleting a post with post id " + postID, true);
+        Assert.assertEquals(postsClient.getHttpStatusForDeletingAnExistingPost(postID), HttpStatus.SC_OK);
         Reporter.log("Post successfully deleted", true);
+    }
+
+    @Test
+    public void verifyCorrectHttpStatusForANonExistingPostWithNestedRoute() {
+        int postId = 500;
+        Reporter.log("Getting a post with post id " + postId + " via nested route", true);
+        Assert.assertEquals(postsClient.getHttpStatusForFetchingPostsWithPostIdNestedRoute(postId), HttpStatus.SC_NOT_FOUND);
+        Reporter.log("Post not found", true);
     }
 }

@@ -62,8 +62,14 @@ public class PostsClient extends BaseClient {
         return post;
     }
 
-    public int getStatusForDeletingAnExistingPost(int postId) {
+    public int getHttpStatusForDeletingAnExistingPost(int postId) {
         PostsEndpoint postsEndpoint = new PostsEndpoint(postId, HttpMethod.DELETE);
+        Response response = new RequestHandler().processRequest(postsEndpoint);
+        return response.getStatusCode();
+    }
+
+    public int getHttpStatusForFetchingPostsWithPostIdNestedRoute(int postId) {
+        PostsEndpoint postsEndpoint = new PostsEndpoint(postId, HttpMethod.GET);
         Response response = new RequestHandler().processRequest(postsEndpoint);
         return response.getStatusCode();
     }
