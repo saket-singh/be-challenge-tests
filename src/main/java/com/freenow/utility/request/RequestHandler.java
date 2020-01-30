@@ -11,6 +11,12 @@ import static io.restassured.RestAssured.given;
 
 public class RequestHandler {
 
+    /**
+     * This method processes any request as per the endpoint details
+     *
+     * @param serviceEndpoint Object of ServiceEndpoint
+     * @return Restassured Response type object
+     */
     public Response processRequest(ServiceEndpoint serviceEndpoint) {
         RestAssured.registerParser("text/plain", Parser.JSON);
 
@@ -21,13 +27,21 @@ public class RequestHandler {
 
         RequestSpecification requestSpecification = formRequestSpecification(serviceEndpoint);
 
-        logRequestDetails(serviceEndpoint, endpointName, url, httpMethod, body);
+//        logRequestDetails(serviceEndpoint, endpointName, url, httpMethod, body);
         Response response = makeAPIRequestAsPerHTTPMethod(url, httpMethod, requestSpecification);
 
-        logResponseDetails(serviceEndpoint, endpointName, response);
+//        logResponseDetails(serviceEndpoint, endpointName, response);
         return response;
     }
 
+    /**
+     * This method performs API request as per the Https method
+     *
+     * @param httpMethod
+     * @param requestSpecification
+     * @param url
+     * @return Restassured Response type object
+     */
     private Response makeAPIRequestAsPerHTTPMethod(String url, HttpMethod httpMethod, RequestSpecification requestSpecification) {
         Response response = null;
         switch (httpMethod) {
@@ -50,6 +64,12 @@ public class RequestHandler {
         return response;
     }
 
+    /**
+     * This method forms the RequestSpecification of RestAssured to be used to make Http calls
+     *
+     * @param serviceEndpoint Object of ServiceEndpoint
+     * @return RestAssured RequestSpecification type object
+     */
     private RequestSpecification formRequestSpecification(ServiceEndpoint serviceEndpoint) {
         RequestSpecification request = given();
         if (serviceEndpoint.headers() != null) {
@@ -68,6 +88,9 @@ public class RequestHandler {
         return request;
     }
 
+    /**
+     * This method is used to log the request details
+     */
     private void logRequestDetails(ServiceEndpoint serviceEndpoint, String endpointName, String url, HttpMethod httpMethod, RequestBody body) {
         Reporter.log(String.format("\n" + endpointName + " URL --- %s %s", httpMethod.toString(), url), true);
 
@@ -80,6 +103,9 @@ public class RequestHandler {
             Reporter.log(String.format(endpointName + " Request --- %s", body.getBodyAsString()), true);
     }
 
+    /**
+     * This method is used to log the response details
+     */
     private void logResponseDetails(ServiceEndpoint serviceEndpoint, String endpointName, Response response) {
         Reporter.log(String.format(endpointName + " Response Status Code --- (%s)", response.getStatusCode()), true);
 

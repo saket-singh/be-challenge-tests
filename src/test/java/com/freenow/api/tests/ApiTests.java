@@ -1,5 +1,6 @@
 package com.freenow.api.tests;
 
+import com.freenow.api.BaseTests;
 import com.freenow.helpers.EmailIdValidator;
 import com.freenow.serviceEndpoints.posts.response.GetPostsResponse;
 import com.freenow.serviceEndpoints.posts.response.Post;
@@ -18,7 +19,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ApiTests {
+public class ApiTests extends BaseTests {
 
     GetUsersClient getUsersClient;
     PostsClient postsClient;
